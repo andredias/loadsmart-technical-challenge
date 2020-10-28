@@ -59,12 +59,12 @@ def main(cargo_csv: Path, trucks_csv: Path) -> None:
     with trucks_csv.open() as f:
         trucks = [t for t in csv.DictReader(f)]
     routes = possible_routes(cargos, trucks)
-    result = best_routes(routes)
+    routes = best_routes(routes)
     with Path('./result.csv').open('w') as f:
         fieldnames = ('cargo', 'truck', 'distance')
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        for row in result:
+        for row in routes:
             writer.writerow(row)
     return
 
