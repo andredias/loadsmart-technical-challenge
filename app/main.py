@@ -6,7 +6,7 @@ from typing import Dict, List
 import typer
 
 
-def distance(lat1: float, long1: float, lat2: float, long2: float) -> float:
+def haversine(lat1: float, long1: float, lat2: float, long2: float) -> float:
     '''
     Calculate distance between Latitude/Longitude points in miles
 
@@ -21,8 +21,8 @@ def distance(lat1: float, long1: float, lat2: float, long2: float) -> float:
     delta_lat = lat2 - lat1
     delta_long = long2 - long1
     d = sin(delta_lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_long / 2) ** 2
-    haversine = 2 * EARTH_RADIUS * asin(sqrt(d))
-    return haversine
+    result = 2 * EARTH_RADIUS * asin(sqrt(d))
+    return result
 
 
 def possible_routes(cargos: List[Dict], trucks: List[Dict]) -> List[Dict]:
@@ -34,7 +34,7 @@ def possible_routes(cargos: List[Dict], trucks: List[Dict]) -> List[Dict]:
         for truck in trucks:
             lat1, long1 = float(cargo['origin_lat']), float(cargo['origin_lng'])
             lat2, long2 = float(truck['lat']), float(truck['lng'])
-            dist = round(distance(lat1, long1, lat2, long2), 2)
+            dist = round(haversine(lat1, long1, lat2, long2), 2)
             result.append(dict(cargo=cargo['product'], truck=truck['truck'], distance=dist))
     return result
 
