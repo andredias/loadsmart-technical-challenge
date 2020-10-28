@@ -20,7 +20,7 @@ def haversine(lat1: float, long1: float, lat2: float, long2: float) -> float:
 
     delta_lat = lat2 - lat1
     delta_long = long2 - long1
-    d = sin(delta_lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_long / 2) ** 2
+    d = sin(delta_lat / 2)**2 + cos(lat1) * cos(lat2) * sin(delta_long / 2)**2
     result = 2 * EARTH_RADIUS * asin(sqrt(d))
     return result
 
@@ -67,7 +67,6 @@ def main(cargo_csv: Path, trucks_csv: Path) -> None:
         for row in result:
             writer.writerow(row)
     return
-
 
 
 if __name__ == '__main__':
