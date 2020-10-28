@@ -7,3 +7,10 @@ lint:
 	mypy .
 	@echo
 	flake8 --config flake8.ini .
+
+
+_test:
+	pytest -x -v --cov-report term-missing --cov-report html --cov-branch --cov app/
+
+
+test: lint _test
